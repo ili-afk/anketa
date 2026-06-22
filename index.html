@@ -392,34 +392,6 @@ form.addEventListener('submit', async function(e){
     btn.textContent = oldText;
     alert('Не удалось отправить заявку. Попробуйте ещё раз чуть позже.');
   }
-}); return; }
-  var btn = form.querySelector('.submit-btn');
-  btn.disabled = true; btn.textContent = 'Отправляем…';
-  var emailOk = false;
-  var fields = {};
-  form.querySelectorAll('input[name], select[name], textarea[name]').forEach(function(el){
-    if(el.type==='checkbox') return; fields[el.name] = el.value;
-  });
-  try{
-    var fsUrl = 'https' + '://' + 'formsubmit.co/ajax/' + CONFIG.EMAIL;
-    var res = await fetch(fsUrl, { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(Object.assign({ _subject:'Новая заявка с анкеты', _template:'table', _captcha:'false' }, fields)) });
-    var data = await res.json().catch(function(){ return {}; });
-    emailOk = res.ok && (data.success === true || data.success === 'true');
-    if(!emailOk){ console.warn('FormSubmit:', data); }
-  }catch(err){ console.warn('FormSubmit error:', err); }
-  if(CONFIG.TELEGRAM_BOT_TOKEN && CONFIG.TELEGRAM_CHAT_ID){
-    try{
-      var msg = '🆕 Новая заявка с анкеты\n\n';
-      Object.keys(fields).forEach(function(k){ if(fields[k]) msg += '• ' + k + ': ' + fields[k] + '\n'; });
-      var tgUrl = 'https' + '://' + 'api.telegram.org/bot' + CONFIG.TELEGRAM_BOT_TOKEN + '/sendMessage';
-      await fetch(tgUrl, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ chat_id: CONFIG.TELEGRAM_CHAT_ID, text: msg }) });
-    }catch(err){}
-  }
-  form.style.display='none';
-  thanks.style.display='block';
-  var note = document.getElementById('thanks-note');
-  if(note){ note.style.display = emailOk ? 'none' : 'block'; }
-  thanks.scrollIntoView({ behavior:'smooth', block:'center' });
 });
 </script>
 </body>
