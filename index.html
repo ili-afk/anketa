@@ -317,7 +317,6 @@ a{color:var(--accent-dark);text-underline-offset:2px}
           <div style="font-size:48px">🎉</div>
           <h3>Спасибо! Заявка принята</h3>
           <p>Я свяжусь с вами в течение 24 часов. Обычно быстрее.</p>
-          
         </div>
       </div>
     </div>
@@ -333,9 +332,7 @@ a{color:var(--accent-dark);text-underline-offset:2px}
 
 <script>
 var CONFIG = {
-  EMAIL: "Iliamih09@gmail.com",
-  TELEGRAM_BOT_TOKEN: "8884358732:AAEA20qixiq9m-48aw4XeKdKSWHH6mcAoCU",
-  TELEGRAM_CHAT_ID: ""
+  WEBHOOK_URL: "https://n8n.vsellm.info/webhook/anketa-submit"
 };
 
 /* scroll reveal */
@@ -363,19 +360,52 @@ form.addEventListener('submit', async function(e){
   var consent = document.getElementById('consent');
   if(!consent.checked){ valid=false; consent.style.color='#E5484D'; } else { consent.style.color=''; }
   if(!valid){ var firstBad = form.querySelector('.field-error'); if(firstBad) firstBad.scrollIntoView({behavior:'smooth',block:'center'}); return; }
+
+  var btn = form.querySelector('.submit-btn');
+  var oldText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Отправляем…';
+
+  var fields = {};
+  form.querySelectorAll('input[name], select[name], textarea[name]').forEach(function(el){
+    if(el.type==='checkbox') return;
+    fields[el.name] = el.value;
+  });
+
+  try{
+    var res = await fetch(CONFIG.WEBHOOK_URL, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(fields)
+    });
+
+    if(!res.ok){
+      throw new Error('Webhook error: ' + res.status);
+    }
+
+    form.style.display='none';
+    thanks.style.display='block';
+    thanks.scrollIntoView({ behavior:'smooth', block:'center' });
+  }catch(err){
+    console.warn('N8N webhook error:', err);
+    btn.disabled = false;
+    btn.textContent = oldText;
+    alert('Не удалось отправить заявку. Попробуйте ещё раз чуть позже.');
+  }
+}); return; }
   var btn = form.querySelector('.submit-btn');
   btn.disabled = true; btn.textContent = 'Отправляем…';
-  // n8n handles delivery
+  var emailOk = false;
   var fields = {};
   form.querySelectorAll('input[name], select[name], textarea[name]').forEach(function(el){
     if(el.type==='checkbox') return; fields[el.name] = el.value;
   });
   try{
-    var fsUrl = 'https://n8n.vsellm.info/webhook/anketa-submit';
-    var res = await fetch(fsUrl, { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(JSON.stringify(fields)) });
-    
-    
-    
+    var fsUrl = 'https' + '://' + 'formsubmit.co/ajax/' + CONFIG.EMAIL;
+    var res = await fetch(fsUrl, { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(Object.assign({ _subject:'Новая заявка с анкеты', _template:'table', _captcha:'false' }, fields)) });
+    var data = await res.json().catch(function(){ return {}; });
+    emailOk = res.ok && (data.success === true || data.success === 'true');
+    if(!emailOk){ console.warn('FormSubmit:', data); }
   }catch(err){ console.warn('FormSubmit error:', err); }
   if(CONFIG.TELEGRAM_BOT_TOKEN && CONFIG.TELEGRAM_CHAT_ID){
     try{
@@ -388,7 +418,7 @@ form.addEventListener('submit', async function(e){
   form.style.display='none';
   thanks.style.display='block';
   var note = document.getElementById('thanks-note');
-  
+  if(note){ note.style.display = emailOk ? 'none' : 'block'; }
   thanks.scrollIntoView({ behavior:'smooth', block:'center' });
 });
 </script>
