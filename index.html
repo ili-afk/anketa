@@ -317,7 +317,7 @@ a{color:var(--accent-dark);text-underline-offset:2px}
           <div style="font-size:48px">🎉</div>
           <h3>Спасибо! Заявка принята</h3>
           <p>Я свяжусь с вами в течение 24 часов. Обычно быстрее.</p>
-          <p id="thanks-note" style="display:none;margin-top:14px;padding:12px 14px;border-radius:12px;background:#FEF7E6;color:#8A6D00;font-size:13px;line-height:1.5;text-align:left">⚠️ Владельцу: письма пока не доставляются — нужно один раз подтвердить почту в FormSubmit. Откройте письмо «Activate Form» от FormSubmit (проверьте «Спам») и нажмите кнопку активации. После этого этот блок исчезнет, а заявки начнут приходить.</p>
+          
         </div>
       </div>
     </div>
@@ -335,7 +335,7 @@ a{color:var(--accent-dark);text-underline-offset:2px}
 var CONFIG = {
   EMAIL: "Iliamih09@gmail.com",
   TELEGRAM_BOT_TOKEN: "8884358732:AAEA20qixiq9m-48aw4XeKdKSWHH6mcAoCU",
-  TELEGRAM_CHAT_ID: "1406941545"
+  TELEGRAM_CHAT_ID: ""
 };
 
 /* scroll reveal */
@@ -365,17 +365,17 @@ form.addEventListener('submit', async function(e){
   if(!valid){ var firstBad = form.querySelector('.field-error'); if(firstBad) firstBad.scrollIntoView({behavior:'smooth',block:'center'}); return; }
   var btn = form.querySelector('.submit-btn');
   btn.disabled = true; btn.textContent = 'Отправляем…';
-  var emailOk = false;
+  // n8n handles delivery
   var fields = {};
   form.querySelectorAll('input[name], select[name], textarea[name]').forEach(function(el){
     if(el.type==='checkbox') return; fields[el.name] = el.value;
   });
   try{
-    var fsUrl = 'https' + '://' + 'formsubmit.co/ajax/' + CONFIG.EMAIL;
-    var res = await fetch(fsUrl, { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(Object.assign({ _subject:'Новая заявка с анкеты', _template:'table', _captcha:'false' }, fields)) });
-    var data = await res.json().catch(function(){ return {}; });
-    emailOk = res.ok && (data.success === true || data.success === 'true');
-    if(!emailOk){ console.warn('FormSubmit:', data); }
+    var fsUrl = 'https://n8n.vsellm.info/webhook/anketa-submit';
+    var res = await fetch(fsUrl, { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(JSON.stringify(fields)) });
+    
+    
+    
   }catch(err){ console.warn('FormSubmit error:', err); }
   if(CONFIG.TELEGRAM_BOT_TOKEN && CONFIG.TELEGRAM_CHAT_ID){
     try{
@@ -388,7 +388,7 @@ form.addEventListener('submit', async function(e){
   form.style.display='none';
   thanks.style.display='block';
   var note = document.getElementById('thanks-note');
-  if(note){ note.style.display = emailOk ? 'none' : 'block'; }
+  
   thanks.scrollIntoView({ behavior:'smooth', block:'center' });
 });
 </script>
