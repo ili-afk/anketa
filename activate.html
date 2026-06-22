@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Активация почты FormSubmit</title>
+<style>
+  body{margin:0;font-family:"Inter",-apple-system,Segoe UI,Arial,sans-serif;background:#F5F6F8;color:#14161A;display:flex;min-height:100vh;align-items:center;justify-content:center;padding:24px}
+  .card{background:#fff;border:1px solid #E6E8EC;border-radius:18px;padding:32px;max-width:440px;width:100%;box-shadow:0 10px 40px rgba(20,22,26,.08);text-align:center}
+  h1{font-size:22px;margin:0 0 10px}
+  p{color:#6B7280;font-size:15px;line-height:1.55;margin:0 0 20px}
+  button{width:100%;border:none;color:#fff;font-weight:700;font-size:17px;background:linear-gradient(135deg,#3A5BFF,#2541C8);border-radius:12px;padding:15px;cursor:pointer}
+  small{display:block;margin-top:16px;color:#9AA1AC;font-size:12px;line-height:1.5}
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>🔑 Активация почты</h1>
+    <p>Это одноразовый шаг. Нажмите кнопку ниже — FormSubmit пришлёт на вашу почту письмо «Activate Form». Откройте его и нажмите кнопку активации. После этого все заявки с анкеты начнут приходить на почту.</p>
+    <form id="af" method="POST">
+      <input type="hidden" name="_subject" value="Активация формы анкеты">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="Сообщение" value="Тестовая отправка для активации">
+      <button type="submit">Активировать форму</button>
+    </form>
+    <small>После подтверждения письма этот файл можно удалить. Почта: Iliamih09@gmail.com</small>
+  </div>
+<script>
+  document.getElementById('af').action = 'https' + '://' + 'formsubmit.co/' + 'Iliamih09@gmail.com';
+</script>
+</body>
+</html>
