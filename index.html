@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сайт-резюме под ключ — оставьте заявку</title>
+<meta name="description" content="Премиальный одностраничный сайт-резюме и лендинг под ключ. Оставьте заявку — соберу за 48 часов.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF;
+  --bg-soft:#F5F6F8;
+  --tint:#EEF2FF;
+  --ink:#14161A;
+  --muted:#6B7280;
+  --faint:#9AA1AC;
+  --border:#E6E8EC;
+  --accent:#3A5BFF;
+  --accent-dark:#2541C8;
+  --accent-soft:rgba(58,91,255,.12);
+  --ok:#0FA968;
+  --err:#E5484D;
+  --shadow-sm:0 1px 2px rgba(20,22,26,.04), 0 2px 6px rgba(20,22,26,.04);
+  --shadow-md:0 6px 24px rgba(20,22,26,.08), 0 2px 8px rgba(20,22,26,.04);
+  --shadow-lg:0 24px 60px rgba(37,65,200,.14), 0 8px 24px rgba(20,22,26,.08);
+  --radius:18px;
+  --radius-sm:12px;
+  --maxw:1080px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+h1,h2,h3,.brand{font-family:"Manrope","Inter",sans-serif;}
+p{margin:0 0 14px}
+a{color:var(--accent-dark);text-underline-offset:2px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.section{padding:96px 0}
+.section--tight{padding:72px 0}
+
+/* ---------- top bar ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--border)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;padding-top:0;padding-bottom:0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:-.02em}
+.brand .dot{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;box-shadow:var(--shadow-sm)}
+.topbar .cta{display:inline-flex;align-items:center;gap:8px;font-family:"Manrope";font-weight:700;font-size:15px;color:#fff;background:var(--ink);padding:10px 18px;border-radius:999px;text-decoration:none;transition:transform .18s ease, background .18s ease}
+.topbar .cta:hover{background:var(--accent-dark);transform:translateY(-1px)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;padding:108px 0 92px;background:
+  radial-gradient(900px 460px at 78% -8%, var(--tint), transparent 60%),
+  radial-gradient(680px 420px at 8% 8%, #F3F6FF, transparent 55%);}
+.hero:before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(58,91,255,.06) 1px, transparent 1px);background-size:26px 26px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 78%);mask-image:linear-gradient(180deg,#000,transparent 78%);pointer-events:none}
+.hero .wrap{position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:"Manrope";font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-dark);background:#fff;border:1px solid var(--border);padding:8px 14px;border-radius:999px;box-shadow:var(--shadow-sm)}
+.eyebrow .pulse{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(15,169,104,.5);animation:pulse 2.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(15,169,104,.45)}70%{box-shadow:0 0 0 9px rgba(15,169,104,0)}100%{box-shadow:0 0 0 0 rgba(15,169,104,0)}}
+.hero h1{margin:22px 0 18px;font-weight:800;font-size:clamp(40px,6vw,68px);line-height:1.04;letter-spacing:-.035em;max-width:14ch}
+.hero h1 .grad{background:linear-gradient(120deg,var(--accent),var(--accent-dark));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lede{font-size:clamp(18px,2.2vw,21px);color:var(--muted);max-width:54ch;margin:0 0 30px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:"Manrope";font-weight:700;font-size:17px;border-radius:999px;padding:16px 30px;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease, background .18s ease}
+.btn--primary{color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-dark));box-shadow:var(--shadow-md)}
+.btn--primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.btn--ghost{color:var(--ink);background:#fff;border-color:var(--border);box-shadow:var(--shadow-sm)}
+.btn--ghost:hover{border-color:var(--accent);color:var(--accent-dark);transform:translateY(-1px)}
+.hero-trust{display:flex;flex-wrap:wrap;gap:22px;margin-top:34px;color:var(--muted);font-size:15px}
+.hero-trust span{display:inline-flex;align-items:center;gap:8px}
+.hero-trust b{color:var(--ink);font-family:"Manrope";font-weight:700}
+.check-ico{color:var(--ok);font-weight:800}
+
+/* ---------- stat strip ---------- */
+.stats{background:var(--ink);color:#fff}
+.stats .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.stat .num{font-family:"Manrope";font-weight:800;font-size:clamp(34px,5vw,48px);letter-spacing:-.03em;background:linear-gradient(120deg,#fff,#B9C5FF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .lbl{color:rgba(255,255,255,.66);font-size:15px;margin-top:4px}
+
+/* ---------- steps ---------- */
+.head{max-width:60ch;margin:0 0 46px}
+.head .kicker{font-family:"Manrope";font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-dark)}
+.head h2{margin:10px 0 12px;font-weight:800;font-size:clamp(30px,4vw,42px);line-height:1.1;letter-spacing:-.03em}
+.head p{color:var(--muted);font-size:18px;margin:0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:30px 26px;box-shadow:var(--shadow-sm);transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:#D5DBE6}
+.card .ico{width:52px;height:52px;border-radius:14px;background:var(--tint);color:var(--accent-dark);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px}
+.card .step{font-family:"Manrope";font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.card h3{margin:6px 0 8px;font-weight:700;font-size:21px;letter-spacing:-.02em}
+.card p{color:var(--muted);margin:0;font-size:16px}
+
+/* ---------- form ---------- */
+.form-section{background:linear-gradient(180deg,var(--bg-soft),#fff 70%)}
+.form-shell{display:grid;grid-template-columns:0.85fr 1.15fr;gap:40px;align-items:start}
+.form-aside h2{font-weight:800;font-size:clamp(28px,3.4vw,38px);line-height:1.08;letter-spacing:-.03em;margin:14px 0 14px}
+.form-aside p{color:var(--muted);font-size:17px}
+.aside-list{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:14px}
+.aside-list li{display:flex;gap:12px;align-items:flex-start;font-size:16px}
+.aside-list .b{flex:none;width:26px;height:26px;border-radius:8px;background:var(--accent-soft);color:var(--accent-dark);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+
+.form-card{position:relative;background:#fff;border:1px solid var(--border);border-radius:24px;padding:36px;box-shadow:var(--shadow-lg)}
+.form-card:before{content:"";position:absolute;inset:0;border-radius:24px;padding:1px;background:linear-gradient(140deg,rgba(58,91,255,.45),transparent 40%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.form-card h3{margin:0 0 4px;font-weight:800;font-size:24px;letter-spacing:-.02em}
+.form-card .sub{color:var(--muted);font-size:15px;margin:0 0 24px}
+.req{color:var(--accent)}
+.field{margin-bottom:18px}
+.field label{display:block;font-family:"Manrope";font-weight:600;font-size:14px;margin-bottom:7px;color:var(--ink)}
+.field input,.field select,.field textarea{
+  width:100%;font:inherit;font-size:16px;color:var(--ink);
+  background:var(--bg-soft);border:1.5px solid transparent;border-radius:12px;
+  padding:14px 15px;transition:border-color .16s ease, background .16s ease, box-shadow .16s ease;
+}
+.field textarea{min-height:92px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:var(--faint)}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;background:#fff;border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);
+}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5' fill='none' stroke='%236B7280' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.error-msg{display:none;color:var(--err);font-size:13px;margin-top:6px}
+.field-error input,.field-error select,.field-error textarea{border-color:var(--err);background:#FEF2F2}
+.field-error .error-msg{display:block}
+.consent{display:flex;gap:11px;align-items:flex-start;margin:6px 0 22px;font-size:14px;color:var(--muted)}
+.consent input{flex:none;width:19px;height:19px;margin-top:2px;accent-color:var(--accent)}
+.consent label{font-size:14px;line-height:1.45}
+.submit-btn{width:100%;border:none;color:#fff;font-family:"Manrope";font-weight:700;font-size:18px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));border-radius:14px;padding:17px 20px;cursor:pointer;box-shadow:var(--shadow-md);transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.submit-btn:disabled{opacity:.7;cursor:default;transform:none}
+.microtext{text-align:center;color:var(--faint);font-size:13px;margin:14px 0 0}
+.thanks{display:none;text-align:center;padding:24px 6px}
+.thanks h3{margin:10px 0 6px;font-size:24px}
+.thanks p{color:var(--muted)}
+
+/* ---------- footer ---------- */
+.footer{border-top:1px solid var(--border);padding:36px 0;color:var(--muted);font-size:14px}
+.footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+.footer a{color:var(--ink)}
+
+/* ---------- reveal animation ---------- */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.pulse{animation:none}}
+
+/* ---------- responsive ---------- */
+@media (max-width:880px){
+  .section{padding:66px 0}
+  .form-shell{grid-template-columns:1fr;gap:30px}
+  .cards{grid-template-columns:1fr}
+  .stats .grid{grid-template-columns:1fr;gap:22px;text-align:center}
+  .hero{padding:84px 0 70px}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .wrap{padding:0 18px}
+  .row{grid-template-columns:1fr}
+  .form-card{padding:24px 20px;border-radius:20px}
+  .topbar .cta{display:none}
+  .hero h1{font-size:clamp(32px,9vw,40px)}
+  .btn{width:100%}
+  .hero-actions{flex-direction:column;align-items:stretch}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand"><span class="dot">L</span>Landing Studio</div>
+    <a class="cta" href="#form">Оставить заявку</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow reveal"><span class="pulse"></span>Сайты-резюме и лендинги под ключ</span>
+    <h1 class="reveal d1">Премиальный <span class="grad">сайт-резюме</span>, который продаёт вас за 8 секунд</h1>
+    <p class="lede reveal d2">Авторский дизайн уровня senior, адаптив под любой экран и готовая ссылка, которой не стыдно делиться с работодателем или клиентом. Заполните короткую анкету — остальное беру на себя.</p>
+    <div class="hero-actions reveal d3">
+      <a class="btn btn--primary" href="#form">Получить мой сайт →</a>
+      <a class="btn btn--ghost" href="#how">Как это работает</a>
+    </div>
+    <div class="hero-trust reveal d3">
+      <span><i class="check-ico">✓</i> Готово за <b>48 часов</b></span>
+      <span><i class="check-ico">✓</i> <b>100%</b> адаптив</span>
+      <span><i class="check-ico">✓</i> Бесплатная правка</span>
+    </div>
+  </div>
+</section>
+
+<section class="stats section--tight">
+  <div class="wrap">
+    <div class="grid">
+      <div class="stat reveal"><div class="num">10+</div><div class="lbl">лет в дизайне и вёрстке</div></div>
+      <div class="stat reveal d1"><div class="num">48 ч</div><div class="lbl">средний срок сборки сайта</div></div>
+      <div class="stat reveal d2"><div class="num">100%</div><div class="lbl">адаптив под телефон и ПК</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker">Как это работает</span>
+      <h2>Три простых шага до готового сайта</h2>
+      <p>Без созвонов и брифов на 10 страниц. Вы заполняете анкету — я собираю и присылаю ссылку.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal">
+        <div class="ico">📝</div>
+        <div class="step">Шаг 1</div>
+        <h3>Заполняете анкету</h3>
+        <p>Около 3 минут: профессия, навыки, опыт, контакты и желаемая тема дизайна.</p>
+      </article>
+      <article class="card reveal d1">
+        <div class="ico">🎨</div>
+        <div class="step">Шаг 2</div>
+        <h3>Собираю дизайн</h3>
+        <p>Делаю чистый премиальный макет под вашу сферу и согласую с вами акценты.</p>
+      </article>
+      <article class="card reveal d2">
+        <div class="ico">🚀</div>
+        <div class="step">Шаг 3</div>
+        <h3>Отдаю готовое</h3>
+        <p>Получаете рабочую ссылку и HTML-файл. Делитесь с работодателями и клиентами.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section form-section" id="form">
+  <div class="wrap">
+    <div class="form-shell">
+      <div class="form-aside reveal">
+        <span class="kicker" style="font-family:Manrope;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-dark)">Заявка</span>
+        <h2>Расскажите о себе — соберу сайт под вас</h2>
+        <p>Заполнение займёт около 3 минут. Поля со <span class="req">*</span> обязательны. Я отвечу в течение 24 часов.</p>
+        <ul class="aside-list">
+          <li><span class="b">✓</span><span>Персональный одностраничный сайт-резюме с современным дизайном.</span></li>
+          <li><span class="b">✓</span><span>Аккуратная адаптивная вёрстка для ПК и телефона.</span></li>
+          <li><span class="b">✓</span><span>Готовый HTML-файл и ссылка для работодателей.</span></li>
+          <li><span class="b">✓</span><span>Одна бесплатная итерация правок по тексту и цветам.</span></li>
+        </ul>
+      </div>
+
+      <div class="form-card reveal d1">
+        <h3>Оставьте заявку</h3>
+        <p class="sub">Заполните форму — и я приступлю к вашему сайту.</p>
+        <form id="anketa" novalidate>
+          <div class="field">
+            <label for="fio">ФИО <span class="req">*</span></label>
+            <input id="fio" name="ФИО" type="text" placeholder="Иван Иванов" required>
+            <span class="error-msg">Заполните это поле</span>
+          </div>
+          <div class="field">
+            <label for="prof">Профессия / специализация <span class="req">*</span></label>
+            <input id="prof" name="Профессия" type="text" placeholder="Например: UX-дизайнер" required>
+            <span class="error-msg">Заполните это поле</span>
+          </div>
+          <div class="field">
+            <label for="skills">Ключевые навыки <span class="req">*</span></label>
+            <textarea id="skills" name="Ключевые навыки" placeholder="Через запятую: Figma, прототипирование, дизайн-системы…" required></textarea>
+            <span class="error-msg">Заполните это поле</span>
+          </div>
+          <div class="field">
+            <label for="exp">Опыт работы <span class="req">*</span></label>
+            <select id="exp" name="Опыт работы" required>
+              <option value="" disabled selected>Выберите…</option>
+              <option>Менее 1 года</option>
+              <option>1–3 года</option>
+              <option>3–5 лет</option>
+              <option>Более 5 лет</option>
+            </select>
+            <span class="error-msg">Выберите вариант</span>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="phone">Телефон <span class="req">*</span></label>
+              <input id="phone" name="Телефон" type="tel" placeholder="+7 900 000-00-00" required>
+              <span class="error-msg">Заполните это поле</span>
+            </div>
+            <div class="field">
+              <label for="email">Email <span class="req">*</span></label>
+              <input id="email" name="Email" type="email" placeholder="you@example.com" required>
+              <span class="error-msg">Укажите корректный email</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="photo">Ссылка на фото / портфолио</label>
+            <input id="photo" name="Фото или портфолио" type="url" placeholder="Google Диск, Яндекс.Диск, Behance…">
+            <span class="error-msg">Проверьте ссылку</span>
+          </div>
+          <div class="field">
+            <label for="theme">Тема дизайна резюме <span class="req">*</span></label>
+            <select id="theme" name="Тема дизайна" required>
+              <option value="" disabled selected>Выберите…</option>
+              <option>Минимализм (светлая)</option>
+              <option>Тёмная / премиум</option>
+              <option>Классическая деловая</option>
+              <option>Яркая / креативная</option>
+              <option>На ваше усмотрение</option>
+            </select>
+            <span class="error-msg">Выберите вариант</span>
+          </div>
+          <div class="consent">
+            <input id="consent" type="checkbox">
+            <label for="consent">Согласен(а) на обработку указанных данных для подготовки сайта.</label>
+          </div>
+          <button type="submit" class="submit-btn">Получить мой сайт →</button>
+          <p class="microtext">🔒 Не передаём ваши данные третьим лицам · Ответим в течение 24 часов</p>
+        </form>
+        <div class="thanks" id="thanks">
+          <div style="font-size:48px">🎉</div>
+          <h3>Спасибо! Заявка принята</h3>
+          <p>Я свяжусь с вами в течение 24 часов. Обычно быстрее.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="brand" style="font-size:16px"><span class="dot" style="width:26px;height:26px;font-size:13px">L</span>Landing Studio</div>
+    <div>Email Iliamih09@gmail.com · Telegram @my_LandingStudioBot</div>
+  </div>
+</footer>
+
+<script>
+var CONFIG = {
+  EMAIL: "Iliamih09@gmail.com",
+  TELEGRAM_BOT_TOKEN: "8884358732:AAEA20qixiq9m-48aw4XeKdKSWHH6mcAoCU",
+  TELEGRAM_CHAT_ID: ""
+};
+
+/* scroll reveal */
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+}, { threshold:0.12 });
+document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+var form = document.getElementById('anketa');
+var thanks = document.getElementById('thanks');
+function clearErr(el){ var w = el.closest('.field'); if(w) w.classList.remove('field-error'); }
+form.querySelectorAll('[required]').forEach(function(el){
+  el.addEventListener('input', function(){ clearErr(el); });
+  el.addEventListener('change', function(){ clearErr(el); });
+});
+form.addEventListener('submit', async function(e){
+  e.preventDefault();
+  var valid = true;
+  form.querySelectorAll('[required]').forEach(function(el){
+    var w = el.closest('.field');
+    var bad = !el.value || !el.value.trim();
+    if(el.type==='email' && el.value){ bad = !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value); }
+    if(bad){ w.classList.add('field-error'); valid=false; } else { w.classList.remove('field-error'); }
+  });
+  var consent = document.getElementById('consent');
+  if(!consent.checked){ valid=false; consent.style.color='#E5484D'; } else { consent.style.color=''; }
+  if(!valid){ var firstBad = form.querySelector('.field-error'); if(firstBad) firstBad.scrollIntoView({behavior:'smooth',block:'center'}); return; }
+  var btn = form.querySelector('.submit-btn');
+  btn.disabled = true; btn.textContent = 'Отправляем…';
+  var fields = {};
+  form.querySelectorAll('input[name], select[name], textarea[name]').forEach(function(el){
+    if(el.type==='checkbox') return; fields[el.name] = el.value;
+  });
+  try{
+    var fsUrl = 'https' + '://' + 'formsubmit.co/ajax/' + CONFIG.EMAIL;
+    await fetch(fsUrl, { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(Object.assign({ _subject:'Новая заявка с анкеты' }, fields)) });
+  }catch(err){}
+  if(CONFIG.TELEGRAM_BOT_TOKEN && CONFIG.TELEGRAM_CHAT_ID){
+    try{
+      var msg = '🆕 Новая заявка с анкеты\n\n';
+      Object.keys(fields).forEach(function(k){ if(fields[k]) msg += '• ' + k + ': ' + fields[k] + '\n'; });
+      var tgUrl = 'https' + '://' + 'api.telegram.org/bot' + CONFIG.TELEGRAM_BOT_TOKEN + '/sendMessage';
+      await fetch(tgUrl, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ chat_id: CONFIG.TELEGRAM_CHAT_ID, text: msg }) });
+    }catch(err){}
+  }
+  form.style.display='none';
+  thanks.style.display='block';
+  thanks.scrollIntoView({ behavior:'smooth', block:'center' });
+});
+</script>
+</body>
+</html>
